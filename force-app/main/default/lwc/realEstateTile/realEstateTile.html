@@ -1,0 +1,26 @@
+<template>
+    <template if:true={speaker}>
+        <lightning-layout vertical-align="center">
+            <lightning-layout-item>
+                <template if:true={speaker.Picture__c}>
+                    <img src={speaker.Picture__c} alt="Profile Photo" />
+                </template>
+
+                <template if:false={speaker.Picture__c}>
+                    <img src="https://img.freepik.com/free-icon/important-person_318-10744.jpg" alt="Profile Photo" height="50px" width="50px" />
+                </template>
+            </lightning-layout-item>
+
+            <lightning-layout-item padding="around-small">
+                <p>{speaker.Name}</p>
+                <p>
+                    <lightning-formatted-email value={speaker.Email}></lightning-formatted-email>
+                </p>
+
+                <p>
+                    <lightning-formatted-rich-text value={speaker.About_Me__c}></lightning-formatted-rich-text>
+                </p>
+            </lightning-layout-item>
+        </lightning-layout>
+      </template>
+    </template>

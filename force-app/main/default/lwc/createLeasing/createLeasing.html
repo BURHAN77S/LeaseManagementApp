@@ -1,0 +1,102 @@
+<template>
+
+    <lightning-card variant="Narrow" title="Leasing Information" icon-name="standard:event">
+        <div class="slds-m-around_small">
+            <template if:true={errors}>
+                {errors}
+            </template>
+        </div>
+
+        <div class="slds-m-around_small">
+            <lightning-input
+                type="text"
+                required
+                variant="standard"
+                name="Name__c"
+                value={leasingRecord.Name__c}
+                label="Name"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <c-custom-lookup
+                onselect= {handleLookup}
+                object-name="Lease_Office_Manager__c"
+                field-name="Name"
+                parent-id-field="Lease_Office_Manager__c"
+                icon-name="standard:people"
+                label="Lease Office Manager">
+            </c-custom-lookup>
+
+            <br/>
+
+            <lightning-input
+                type="datetime"
+                required
+                variant="standard"
+                name="Start_Date_Time__c"
+                value={leasingRecord.Start_Date_Time__c}
+                label="Start Date"
+                onchange={handleChange}>
+            </lightning-input>
+
+            <lightning-input
+                type="datetime"
+                variant="standard"
+                name="End_Date_Time__c"
+                value={leasingRecord.End_Date_Time__c}
+                label="End Date"
+                onchange={handleChange}>
+            </lightning-input>
+            
+            <lightning-input
+            type="number"
+            required
+            variant="standard"
+            name="Max_Potential_Client__c"
+            value={leasingRecord.Potential_Client__c}
+            label="Max Potential Client"
+            onchange={handleChange}>
+        </lightning-input>
+            
+            <c-custom-lookup
+                onselect= {handleLookup}
+                object-name="Location__c"
+                parent-id-field="Location__c"
+                icon-name="utility:location"
+                field-name="Name"
+                label="Leasing Location">
+            </c-custom-lookup>
+
+            <br/>
+
+            <lightning-input-rich-text
+                
+                variant="standard"
+                value={leasingRecord.Leasing_Detail__c}
+                name="Leasing_Detail__c"
+                label="Leasing Detail"
+                onchange={handleChange}>
+            </lightning-input-rich-text>
+            
+        </div>
+
+        <div class="slds-m-around_small">
+            <lightning-button
+                label="Cancel"
+                title="Cancel"
+                onclick={handleCancel}>
+            </lightning-button>
+
+            &nbsp; &nbsp;
+
+            <lightning-button
+                variant="brand"
+                label="Add Leasing"
+                title="Add Leasing"
+                onclick={handleClick}>
+            </lightning-button>
+
+        </div>
+    </lightning-card>
+
+</template>

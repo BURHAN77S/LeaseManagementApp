@@ -1,0 +1,81 @@
+<!-- sldsValidatorIgnore -->
+<template>
+   
+    <div class="slds-var-m-around_small">
+    <lightning-card variant="Narrow" title="Leasing Details" icon-name="standard:event">
+        <lightning-tabset variant="scoped" active-tab-value="event">
+
+            <lightning-tab label="Leasing Details" value="event">
+                <div class="slds-var-m-around_small">
+                    <lightning-record-form
+                    object-api-name="Leasing__c"
+                    record-id={recordId}
+                    mode="readonly"
+                    layout-type="Full"
+                    columns="2">
+                </lightning-record-form>
+            </div>
+        </lightning-tab>
+
+        <lightning-tab label="Real Estate Agent Details" value="speaker" onactive={handleSpeakerActive}>
+            <lightning-button  
+             variant="brand"
+             label="New Real Estate Agent"
+             title="New Real Estate Agent"
+             onclick={createSpeaker}>
+            </lightning-button>
+
+            <br /><br />
+
+            <template if:true={speakerList}>
+                <template for:each={speakerList} for:item="speaker">
+                    <c-real-estate-tile
+                    speaker={speaker}
+                    key={speaker.Id}>
+                </c-real-estate-tile>
+                </template>
+            </template>
+
+            <template if:false={errors}>
+                <template if:false={speakerList}>
+                    There are no Speaker associated with the Event
+                </template>
+            </template>
+        </lightning-tab>
+
+        <lightning-tab label="Location Details" value="location" onactive={handleLocationDetails}>
+            <template if:true={eventRec}>
+                Location Landmark - {eventRec.Location__r.Land_Mark__c}
+                <lightning-formatted-address
+                city={eventRec.Location__r.City__c}
+                province={eventRec.Location__r.State__c}
+                postal-code={eventRec.Location__r.Postal_Code__c}
+                country={eventRec.Location__r.Country__c}
+                street={eventRec.Location__r.Street__c}
+                title="Leasing Location">
+            </lightning-formatted-address>
+        </template>
+            
+        </lightning-tab>
+
+        <lightning-tab label="Potential Client Details" value="attendee" onactive={handleEventAttendee}>
+            <lightning-button
+            variant="brand"
+            label="New Potential Client"
+            title="New Potential Client"
+            onclick={createAttendee}>
+        </lightning-button>
+
+        <!-- sldsValidatorIgnoreNextLine -->
+        <lightning-datatable
+            key-field="id"
+            data={attendeesList}
+            show-row-number-column
+            hide-checkbox-column
+            columns={columnsList}>
+        </lightning-datatable>
+       </lightning-tab>
+      </lightning-tabset>
+     </lightning-card>
+    </div> 
+</template>
