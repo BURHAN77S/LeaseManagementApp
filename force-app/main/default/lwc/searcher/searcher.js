@@ -4,7 +4,7 @@ export default class Searcher extends LightningElement {
     @track keyword;
 
     @api isRequired = 'false';
-    @api cmpLabel = 'Search Event';
+    @api cmpLabel = 'Search Leasing';
     @api showLabel = 'true';
 
     /* Check the isRequired prop is true then set the prop to true*/
@@ -22,8 +22,10 @@ export default class Searcher extends LightningElement {
         var keyword = event.target.value;
 
         if(keyword && keyword.length >= 2){
-            let seacrhEvent = new CustomEvent('seacrh', {
-                detail : {value : keyword}
+            let seacrhEvent = new CustomEvent('search', {
+                detail : {
+                    value : keyword
+                }
             });
 
             this.dispatchEvent(seacrhEvent);

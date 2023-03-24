@@ -1,0 +1,36 @@
+<!-- sldsValidatorIgnore -->
+<template>
+    <div if:true={recordId} class="slds-p-bottom_x-small">
+        <!--blank area to get recordId ctivated-->
+    </div>
+
+    <template if:true={errors}>
+        {errors}
+    </template>
+
+    <lightning-card variant="Narrow" title="My Leasings" icon-name="standard:event" >
+        <div class="slds-m-around_small">
+            <lightning-accordion active-section-name="Upcoming Leasings" allow-multiple-sections-open>
+                <lightning-accordion-section name="Upcoming Leasings" label="Upcoming Leasings">
+                   
+                    <lightning-datatable
+                        key-field="Id"
+                        data={upcomingLeasings}
+                        selected-rows={selectedLeasings}
+                        columns={columnsList}>
+                    </lightning-datatable>
+                </lightning-accordion-section>
+                <lightning-accordion-section name="Past Leasings" label="Past Leasings">
+                    <lightning-datatable
+                        key-field="Id"
+                        data={pastLeasings}
+                        show-row-number-column
+                        hide-checkbox-column
+                        columns={columnsList}>
+                    </lightning-datatable>
+                </lightning-accordion-section>
+            </lightning-accordion>
+        </div>
+
+    </lightning-card>
+</template>
