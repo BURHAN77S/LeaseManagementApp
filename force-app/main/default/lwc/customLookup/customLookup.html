@@ -2,34 +2,34 @@
     <div class="slds-m-padding_around">
         <template if:false={selectedRecord}>
             <c-searcher
-                onseacrh={handleSearch}
+                onsearch={handleSearch}
                 cmp-label={label}
                 is-required="true">
             </c-searcher>
         </template>
     </div>
 
-
-    <div class="slds-m-padding_around">
+    <div clas="slds-m-padding_around">
         <template if:false={selectedRecord}>
             <template if:true={records}>
                 <template for:each={records} for:item="rec" for:index="index">
-                    <ul key={rec.Id} class="slds-listbox ">
-                        <c-record-list 
+                    <ul key={rec.Id} class="slds-listbox">
+                        <c-record-list
                             key={rec.Id}
                             rec={rec}
                             icon-name={iconName}
                             onselect={handleSelect}>
                         </c-record-list>
-                    </ul>
+                    </ul>    
                 </template>
+            </template>
         </template>
-    </template>
+    </div>
 
     <template if:true={selectedRecord}>
-        <label class="slds-form-element__label" for="unipue-id-of-input">{label}</label>
+        <label class="slds-form-element__label" for="unique-id-of-input">{label}</label>
 
-        <div class="slds-pillcontainer">
+        <div class="slds-pill-container">
             <lightning-pill
                 class="pillSize"
                 href="JavaScript:void(0);"
@@ -45,5 +45,4 @@
             </lightning-pill>
         </div>
     </template>
-    </div>
 </template>
